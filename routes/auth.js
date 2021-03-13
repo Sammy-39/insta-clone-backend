@@ -121,7 +121,7 @@ router.post("/reset-password", async(req,res)=>{
                 subject: "Password reset",
                 html: `
                       <p> You have requested for password reset</p>
-                      <p> Click <a href='http://localhost:3000/change-password/${resetPasswordToken}' target="_blank"> here </a> to reset password </p>
+                      <p> Click <a href='https://insta-clone-frontend-app.herokuapp.com/change-password/${resetPasswordToken}' target="_blank"> here </a> to reset password </p>
                       <p> This link will expire in one hour. </p>
                       <p> If you have not requested to change password ignore the mail. </p>
                 `
