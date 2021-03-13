@@ -2,18 +2,21 @@ const express = require("express")
 const bcrypt = require("bcryptjs")
 const crypto = require('crypto')
 const nodemailer = require('nodemailer')
-const sendgridTransport = require('nodemailer-sendgrid-transport')
+require('dotenv').config()
+
 const router = express.Router()
 
 const mongoose = require("mongoose")
 const dbURI = require("../db/config")
 const User = require("../db/userModel")
 
-const transporter = nodemailer.createTransport(sendgridTransport({
-    auth:{
-        api_key : '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'
-    }
-}))
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
+        }
+})
 
 router.post("/signup",async (req,res)=>{
     try{
@@ -117,7 +120,7 @@ router.post("/reset-password", async(req,res)=>{
             await user.save()
             transporter.sendMail({
                 to: user.email,
-                from: "testmail367367@gmail.com",
+                from: "no-reply@insta-clone.com",
                 subject: "Password reset",
                 html: `
                       <p> You have requested for password reset</p>
